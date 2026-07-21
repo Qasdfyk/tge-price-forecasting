@@ -31,6 +31,10 @@ data/processed/**
 !data/raw/weather/.gitkeep
 !data/processed/.gitkeep
 
+# Generated reports / figures
+reports/figures/**
+!reports/figures/.gitkeep
+
 # MLflow / model artifacts (later steps)
 mlruns/
 models/
