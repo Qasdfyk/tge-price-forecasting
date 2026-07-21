@@ -23,10 +23,7 @@ DEFAULT_HEADERS = {
 
 def _daterange_filter(start: date, end: date) -> str:
     """Build an inclusive OData filter on ``business_date``."""
-    return (
-        f"business_date ge '{start.isoformat()}' and "
-        f"business_date le '{end.isoformat()}'"
-    )
+    return f"business_date ge '{start.isoformat()}' and " f"business_date le '{end.isoformat()}'"
 
 
 def fetch_pse_endpoint(

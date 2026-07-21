@@ -88,11 +88,7 @@ def fetch_weather_range(
     frame = frame.drop(columns=["time"]).sort_values("timestamp").reset_index(drop=True)
 
     # Prefix columns to avoid name collisions on join
-    rename = {
-        col: f"weather_{col}"
-        for col in frame.columns
-        if col != "timestamp"
-    }
+    rename = {col: f"weather_{col}" for col in frame.columns if col != "timestamp"}
     frame = frame.rename(columns=rename)
 
     out_path = output_dir / "weather_hourly.parquet"

@@ -48,6 +48,8 @@ src = ["src", "scripts"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "N"]
+# Typer uses function calls in defaults by design (typer.Option / typer.Argument).
+ignore = ["B008"]
 
 [tool.black]
 line-length = 100

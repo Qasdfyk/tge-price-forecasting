@@ -21,9 +21,7 @@ def load_hourly_dataset(path: Path) -> pd.DataFrame:
     """Load the processed hourly dataset from Parquet or CSV."""
     path = Path(path)
     if not path.is_file():
-        raise FileNotFoundError(
-            f"Dataset not found: {path}. Run `download-data` first (Step 1)."
-        )
+        raise FileNotFoundError(f"Dataset not found: {path}. Run `download-data` first (Step 1).")
 
     if path.suffix == ".parquet":
         frame = pd.read_parquet(path)
@@ -32,9 +30,7 @@ def load_hourly_dataset(path: Path) -> pd.DataFrame:
     else:
         raise ValueError(f"Unsupported dataset format: {path.suffix}")
 
-    frame["timestamp"] = pd.to_datetime(frame["timestamp"], utc=True).dt.tz_convert(
-        "Europe/Warsaw"
-    )
+    frame["timestamp"] = pd.to_datetime(frame["timestamp"], utc=True).dt.tz_convert("Europe/Warsaw")
     return frame.sort_values("timestamp").reset_index(drop=True)
 
 

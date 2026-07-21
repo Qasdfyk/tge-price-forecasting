@@ -63,8 +63,7 @@ def _build_timestamps(delivery_date: date, n_hours: int) -> list[datetime]:
     )
     midnight_utc = local_midnight.astimezone(ZoneInfo("UTC"))
     return [
-        (midnight_utc + timedelta(hours=offset)).astimezone(WARSAW_TZ)
-        for offset in range(n_hours)
+        (midnight_utc + timedelta(hours=offset)).astimezone(WARSAW_TZ) for offset in range(n_hours)
     ]
 
 
