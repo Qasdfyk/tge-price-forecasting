@@ -1,0 +1,45 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Data (keep directory structure via .gitkeep)
+data/raw/**
+data/processed/**
+!data/raw/.gitkeep
+!data/raw/tge/.gitkeep
+!data/raw/pse/.gitkeep
+!data/raw/weather/.gitkeep
+!data/processed/.gitkeep
+
+# MLflow / model artifacts (later steps)
+mlruns/
+models/
+*.ckpt
+*.pt
+*.pth
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+.cursor/
