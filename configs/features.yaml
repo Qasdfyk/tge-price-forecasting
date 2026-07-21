@@ -1,0 +1,57 @@
+# Feature engineering + Dataset config (Step 2)
+
+paths:
+  input_dataset: data/processed/hourly_dataset.parquet
+  features_dataset: data/processed/features.parquet
+  meta_path: data/processed/feature_meta.json
+  scaler_path: data/processed/feature_scaler.joblib
+
+target_column: price_pln_mwh
+
+# Autoregressive price lags (hours)
+price_lags:
+  - 1
+  - 2
+  - 3
+  - 24
+  - 48
+  - 168
+
+# Optional lags for exogenous series (hours)
+exog_lags:
+  load_fcst: [24]
+  gen_wi: [24]
+  gen_fv: [24]
+
+# Columns used as model inputs (after engineering). Target is excluded.
+# Calendar / holiday / lag columns are appended automatically.
+base_feature_columns:
+  - load_fcst
+  - gen_wi
+  - gen_fv
+  - kse_pow_dem
+  - weather_temperature_2m
+  - weather_wind_speed_10m
+  - weather_shortwave_radiation
+  - weather_cloud_cover
+  - weather_precipitation
+  - weather_relative_humidity_2m
+
+# Chronological split (no random shuffle).
+# test = last `test_months`; val = `val_months` immediately before test.
+splits:
+  test_months: 12
+  val_months: 3
+
+# Sequence windows for LSTM / Transformer (Step 3)
+sequence:
+  lookback: 168   # hours of history in each sample
+  horizon: 24     # hours to predict (day-ahead profile)
+
+dataloader:
+  batch_size: 64
+  # pin_memory must be true for faster host→GPU transfers
+  pin_memory: true
+  # On Windows, 2–4 is usually stable; Linux can go higher
+  num_workers: 4
+  persistent_workers: true
